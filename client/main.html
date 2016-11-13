@@ -8,6 +8,7 @@
   <h1>Meteor Chat Example</h1>
 
   {{#if currentUser}}
+    <div class="room-list">{{> roomList}}</div>
     {{> messageInput}}
     {{> messageList}}
   {{else}}
@@ -31,4 +32,14 @@
   <span class="message-item__author">{{message.author}}</span>:
   {{message.text}}
   <span class="message-item__date">&ndash; {{formatDate message.createdAt}}</span>
+</template>
+
+<template name="roomList">
+  <strong>Rooms:</strong>
+  <label>
+    <input type="radio" name="room" value="main" checked="{{isChecked 'main'}}"> Main
+  </label>
+  <label>
+    <input type="radio" name="room" value="fun" checked="{{isChecked 'fun'}}"> Fun
+  </label>
 </template>

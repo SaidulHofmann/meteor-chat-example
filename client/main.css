@@ -11,3 +11,7 @@ li {
   color: gray;
   font-size: .8em;
 }
+
+.room-list {
+  margin-bottom: 10px;
+}
