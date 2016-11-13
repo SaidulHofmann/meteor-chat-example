@@ -1,25 +1,29 @@
 <head>
-  <title>meteor-chat-example</title>
+  <title>Meteor Chat Example</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Meteor Chat Example</h1>
 
-  {{> hello}}
-  {{> info}}
+  {{> messageInput}}
+  {{> messageList}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="messageInput">
+  <input type="text" class="js-author" placeholder="Your Name">
+  <input type="text" class="js-message" placeholder="Your Message">
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
+<template name="messageList">
   <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+    {{#each message in messages}}
+    <li>{{> messageItem message=message}}</li>
+    {{/each}}
   </ul>
+</template>
+
+<template name="messageItem">
+  <span class="message-item__author">{{message.author}}</span>:
+  {{message.text}}
+  <span class="message-item__date">&ndash; {{formatDate message.createdAt}}</span>
 </template>

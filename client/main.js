@@ -1,22 +1,37 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Messages } from '../imports/api/messages';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+const ENTER_KEY = 13;
+
+Template.messageList.helpers({
+  messages () {
+    return Messages.find({}, { date: -1 });
+  }
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
+Template.messageItem.helpers({
+  formatDate (dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString();
+  }
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Template.messageInput.events({
+  'keyup .js-message' (evt, instance) {
+    if (evt.which === ENTER_KEY) {
+      const text = evt.target.value;
+      const author = instance.find('.js-author').value;
+
+      if (text && author) {
+        Messages.insert({
+          author,
+          text,
+          createdAt: new Date()
+        });
+        evt.currentTarget.value = '';
+      }
+    }
+  }
 });
