@@ -3,14 +3,19 @@
 </head>
 
 <body>
+  {{> loginButtons}}
+
   <h1>Meteor Chat Example</h1>
 
-  {{> messageInput}}
-  {{> messageList}}
+  {{#if currentUser}}
+    {{> messageInput}}
+    {{> messageList}}
+  {{else}}
+   <div>Please log in to read and write messages</div>
+  {{/if}}
 </body>
 
 <template name="messageInput">
-  <input type="text" class="js-author" placeholder="Your Name">
   <input type="text" class="js-message" placeholder="Your Message">
 </template>
 

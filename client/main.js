@@ -1,7 +1,13 @@
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { Template } from 'meteor/templating';
 import { Messages } from '../imports/api/messages';
 
 import './main.html';
+
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_ONLY'
+});
 
 const ENTER_KEY = 13;
 
@@ -22,9 +28,9 @@ Template.messageInput.events({
   'keyup .js-message' (evt, instance) {
     if (evt.which === ENTER_KEY) {
       const text = evt.target.value;
-      const author = instance.find('.js-author').value;
+      const author = Meteor.user().username;
 
-      if (text && author) {
+      if (text) {
         Messages.insert({
           author,
           text,
