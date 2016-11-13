@@ -11,6 +11,10 @@ Accounts.ui.config({
 
 const ENTER_KEY = 13;
 
+Template.messageList.onCreated(function () {
+  Meteor.subscribe('messages');
+});
+
 Template.messageList.helpers({
   messages () {
     return Messages.find({}, { date: -1 });
@@ -28,14 +32,9 @@ Template.messageInput.events({
   'keyup .js-message' (evt, instance) {
     if (evt.which === ENTER_KEY) {
       const text = evt.target.value;
-      const author = Meteor.user().username;
 
       if (text) {
-        Messages.insert({
-          author,
-          text,
-          createdAt: new Date()
-        });
+        Meteor.call('postMessage', text);
         evt.currentTarget.value = '';
       }
     }
