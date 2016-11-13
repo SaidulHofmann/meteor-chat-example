@@ -1,2 +1,1 @@
-import { Meteor } from 'meteor/meteor';
-import { Messages } from '../imports/api/messages';
+import '../imports/startup/server';

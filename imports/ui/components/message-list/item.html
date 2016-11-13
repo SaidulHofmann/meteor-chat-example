@@ -1,0 +1,5 @@
+<template name="messageListItem">
+  <span class="message-list-item__author">{{message.author}}</span>:
+  {{message.text}}
+  <span class="message-list-item__date">&ndash; {{formatDate message.createdAt}}</span>
+</template>

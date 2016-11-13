@@ -1,0 +1,13 @@
+<template name="mainPage">
+  {{> loginButtons}}
+
+  <h1>Meteor Chat Example</h1>
+
+  {{#if currentUser}}
+    <div class="room-list">{{> roomList}}</div>
+    {{> messageInput}}
+    {{> messageList}}
+  {{else}}
+    <div>Please log in to read and write messages</div>
+  {{/if}}
+</template>

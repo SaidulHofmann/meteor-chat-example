@@ -1,0 +1,7 @@
+<template name="messageList">
+  <ul>
+    {{#each message in messages}}
+    <li class="message-list__item">{{> messageListItem message=message}}</li>
+    {{/each}}
+  </ul>
+</template>

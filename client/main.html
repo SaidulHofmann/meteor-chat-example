@@ -3,43 +3,5 @@
 </head>
 
 <body>
-  {{> loginButtons}}
-
-  <h1>Meteor Chat Example</h1>
-
-  {{#if currentUser}}
-    <div class="room-list">{{> roomList}}</div>
-    {{> messageInput}}
-    {{> messageList}}
-  {{else}}
-   <div>Please log in to read and write messages</div>
-  {{/if}}
+  {{> mainPage}}
 </body>
-
-<template name="messageInput">
-  <input type="text" class="js-message" placeholder="Your Message">
-</template>
-
-<template name="messageList">
-  <ul>
-    {{#each message in messages}}
-    <li>{{> messageItem message=message}}</li>
-    {{/each}}
-  </ul>
-</template>
-
-<template name="messageItem">
-  <span class="message-item__author">{{message.author}}</span>:
-  {{message.text}}
-  <span class="message-item__date">&ndash; {{formatDate message.createdAt}}</span>
-</template>
-
-<template name="roomList">
-  <strong>Rooms:</strong>
-  <label>
-    <input type="radio" name="room" value="main" checked="{{isChecked 'main'}}"> Main
-  </label>
-  <label>
-    <input type="radio" name="room" value="fun" checked="{{isChecked 'fun'}}"> Fun
-  </label>
-</template>
